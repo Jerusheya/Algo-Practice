@@ -1,0 +1,15 @@
+@keyframes fillWater {
+    from {
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+
+    to {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+}
+
+.water {
+    animation: fillWater 0.5s ease-out;
+}

@@ -1,0 +1,12 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-3);
+  cursor: pointer;
+}
+
+.card:hover { box-shadow: 0 4px 12px rgb(15 23 42 / 0.1); }
+
+.card:focus-visible { outline: 2px solid var(--primary); }

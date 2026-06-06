@@ -1,0 +1,24 @@
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: flex-end;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-4);
+}
+
+.statuses {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.statuses legend { font-size: 0.875rem; font-weight: 500; }
+
+.statuses label {
+  margin-right: var(--space-3);
+  font-size: 0.875rem;
+}
