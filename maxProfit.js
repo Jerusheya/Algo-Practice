@@ -34,31 +34,79 @@ const data = [
 const memo = {};
 
 function maxProfit(n) {
+
   if (n in memo) {
     return memo[n];
   }
 
-  let maximumProfit = 0;
+  let maxProfitVal = 0;
+  let solutions = [];
 
-  for (const record of data) {
-    if (record.time > n) continue;
+  for (const building of data) {
+
+    if (building.time > n) {
+      continue;
+    }
 
     const currentProfit =
-      (n - record.time) * record.earn;
+      (n - building.time) * building.earn;
 
-    const futureProfit =
-      maxProfit(n - record.time);
+    const future =
+      maxProfit(n - building.time);
 
-    maximumProfit = Math.max(
-      maximumProfit,
-      currentProfit + futureProfit
-    );
+    const actualProfit =
+      currentProfit + future.profit;
+
+    const actualSolutions =
+      future.solutions.map(solution => ({
+        ...solution,
+        [building.name]:
+          solution[building.name] + 1
+      }));
+
+    if (actualProfit > maxProfitVal) {
+
+      maxProfitVal = actualProfit;
+      solutions = actualSolutions;
+
+    } else if (
+      actualProfit === maxProfitVal
+    ) {
+
+      solutions.push(...actualSolutions);
+    }
   }
 
-  memo[n] = maximumProfit;
-  return maximumProfit;
+  if (solutions.length === 0) {
+    solutions.push({
+      T: 0,
+      P: 0,
+      C: 0
+    });
+  }
+
+  memo[n] = {
+    profit: maxProfitVal,
+    solutions
+  };
+
+  return memo[n];
 }
 
-console.log(maxProfit(7));
-console.log(maxProfit(8));
-console.log(maxProfit(13));
+function formatSolution(solution) {
+  return `T: ${solution.T} P: ${solution.P} C: ${solution.C}`;
+}
+
+function printOutput(n) {
+  const output = maxProfit(n);
+  console.log(`Earnings: $${output.profit}`);
+  console.log('Solutions');
+  output.solutions.forEach((solution, i) => {
+    console.log(`${i + 1}. ${formatSolution(solution)}`);
+  });
+}
+
+printOutput(13);
+printOutput(7);
+printOutput(8);
+printOutput(49);
